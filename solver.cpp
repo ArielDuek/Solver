@@ -91,7 +91,13 @@ solver::ComplexVariable::ComplexPolinom solver::operator * (solver::ComplexVaria
 
 solver::ComplexVariable::ComplexPolinom solver::operator / (solver::ComplexVariable::ComplexPolinom A, solver::ComplexVariable::ComplexPolinom B){
     complex<double> zero=0;
-    if (B.getC() == zero ) return A;
+    if (B.getC() == zero && B.getB()==zero && B.getA()==zero) throw runtime_error("can not divide by 0!!");
+    if (B.getC() == zero && B.getB()==zero) return A;
+    if (B.getC() == zero ){
+        solver::ComplexVariable::ComplexPolinom R(0, 0, A.getB() / B.getB());
+        R.setX(A.getX());
+        return R;
+    }
     solver::ComplexVariable::ComplexPolinom R(0, A.getB() / B.getC(), A.getC() / B.getC());
     R.setX(A.getX());
     return R;
@@ -100,14 +106,22 @@ solver::ComplexVariable::ComplexPolinom solver::operator / (solver::ComplexVaria
 solver::ComplexVariable::ComplexPolinom solver::operator == (solver::ComplexVariable::ComplexPolinom A, solver::ComplexVariable::ComplexPolinom B){
     solver::ComplexVariable::ComplexPolinom C = A - B;
     complex<double> zero=0, two = 2, four = 4;
+    if (C.getA()==zero && C.getB()==zero) {
+        if (C.getC()==zero){
+            C.getX()->img=zero;
+            return C;
+        }
+        else throw runtime_error("there is no solution");
+    }
     if (C.getA()==zero) C.getX()->img = -C.getC()/C.getB();
     else C.getX()->img = (-C.getB() + sqrt(pow(C.getB(), two) - (four*C.getA()*C.getC())))/(two*C.getA());
     return C;
 }
 
-
 //===========================================================================================================================
 
-
 double solver::solve(RealVariable::RealPolinom r){return r.getX()->real;}
-complex<double> solver::solve(ComplexVariable::ComplexPolinom x){return x.getX()->img;}
+complex<double> solver::solve(ComplexVariable::ComplexPolinom x){
+    if(x.getX()->img.imag()==(-0)) x.getX()->img.imag(0);
+    return x.getX()->img;
+}

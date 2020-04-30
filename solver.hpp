@@ -14,7 +14,6 @@ namespace solver{
         RealVariable() {}
         ~RealVariable() {}
 
-
         class RealPolinom{     //FORM: ar^2+br+c
         private:
             double a,b,c;
@@ -35,8 +34,8 @@ namespace solver{
             RealVariable* getX() { return r; };
             void setX(RealVariable* R) { this->r = R; }
             bool haveVar() {return this->var;}
+            void setVar(bool var) { this->var = var; }
         };
-
         friend RealPolinom operator ^ (RealPolinom A, int e);
         friend RealPolinom operator + (RealPolinom A, RealPolinom B);
         friend RealPolinom operator - (RealPolinom A, RealPolinom B);
@@ -57,7 +56,6 @@ namespace solver{
         ComplexVariable() {}
         ~ComplexVariable() {
         }
-
 
         class ComplexPolinom{     //FORM: ax^2+bx+c
         private:
@@ -81,7 +79,6 @@ namespace solver{
             void setX(ComplexVariable* X) { this->x = X; }
             bool haveVar() {return this->var;}
         };
-
         friend ComplexPolinom operator ^ (ComplexPolinom A, int e);
         friend ComplexPolinom operator + (ComplexPolinom A, ComplexPolinom B);
         friend ComplexPolinom operator - (ComplexPolinom A, ComplexPolinom B);
@@ -90,10 +87,6 @@ namespace solver{
         friend ComplexPolinom operator == (ComplexPolinom A, ComplexPolinom B);
     };
 
-//==================================================================================
-
     double solve(RealVariable::RealPolinom r);
     complex<double> solve(ComplexVariable::ComplexPolinom x);
-
 }
-
