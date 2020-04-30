@@ -47,26 +47,6 @@ TEST_CASE("Test the function with RealVariable")
             CHECK(solve( (x^2) == 3136)==56);
             CHECK(solve( (x^2)  == 0)==0);
 
-            //-------
-            CHECK(solve( (x^2) == 4)==2);
-            CHECK(solve( (x^2)  == 16)==4);
-            CHECK(solve(( x^2)  == 9)==3);
-            CHECK(solve( (x^2) == 100)==10);
-            CHECK(solve( (x^2)  == 81)==9);
-            CHECK(solve( (x^2)  == 25)==5);
-            CHECK(solve( (x^2) == 36)==6);
-            CHECK(solve( (x^2)  == 196)==14);
-            CHECK(solve( (x^2)  == 121)==11);
-            CHECK(solve( (x^2) ==144)==12);
-            CHECK(solve( (x^2) == 6241)==79);
-            CHECK(solve( (x^2)  == 2401)==49);
-            CHECK(solve(( x^2)  == 4356)==66);
-            CHECK(solve( (x^2) == 10000)==100);
-            CHECK(solve( (x^2)  == 9801)==99);
-            CHECK(solve( (x^2) == 3136)==56);
-            CHECK(solve( (x^2)  == 0)==0);
-            //-------
-
             CHECK(solve( (x^2) == 1681)==41);
             CHECK(solve( (x^2)  == 25921)==161);
             CHECK(solve(( x^2)  == 361)==19);
