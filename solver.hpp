@@ -37,7 +37,7 @@ namespace solver{
         POLI(RealVariable& r) : a(0), r(&r), b(1), c(0), var(true), e(1) {}     //holds the x Final Resault into LINE
         POLI(double a, int e) : a(a), b(0), c(0), e(e), var(false) {}        //make form of: x^e into POLI
         POLI(double a, double b, double c, int e) : a(a), b(b), c(c), e(e), var(false) {}   //copy Constructor
-        ~POLI(){}
+//        ~POLI(){}
 
         double getA() { return a; };
         double getB() { return b; };
@@ -108,7 +108,13 @@ namespace solver{
     }
 
     POLI operator / (POLI A, POLI B){ //  b1*r+c1 / b2*r+c2   ->   (b1/b2)*r+(c1/c2)
-        if (B.getC() == 0 ) return A;
+        if (B.getC() == 0 && B.getB()==0 && B.getA()==0) throw runtime_error("can not divide by 0!!");
+        if (B.getC() == 0 && B.getB()==0) return A;
+        if (B.getC() == 0) {
+            POLI R(0, 0, A.getB() / B.getB(), 1);
+            R.setX(A.getX());
+            return R;
+        }
         POLI R(0, A.getB() / B.getC(), A.getC() / B.getC(), 1);
         R.setX(A.getX());
         return R;
@@ -116,8 +122,19 @@ namespace solver{
 
     POLI operator == (POLI A, POLI B){
         POLI C = A - B;
+        if (C.getA()==0 && C.getB()==0) {
+            if (C.getC()==0){
+                C.getX()->real=0;
+                return C;
+            }
+            else throw runtime_error("there is no solution");
+        }
         if (C.getA()==0) C.getX()->real = -C.getC()/C.getB();
-        else C.getX()->real = (-C.getB() + sqrtf(powf(C.getB(), 2) - (4*C.getA()*C.getC())))/(2*C.getA());
+        else {
+            double x = (-C.getB() + sqrtf(powf(C.getB(), 2) - (4*C.getA()*C.getC())))/(2*C.getA());
+            if (isnan(x)) throw runtime_error("there is no solution");
+            C.getX()->real = x;
+        }
         return C;
     }
 

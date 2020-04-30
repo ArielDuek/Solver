@@ -9,7 +9,7 @@ TEST_CASE("Test the function with RealVariable")
 {
     RealVariable x;
 
-            CHECK(solve(2*x-2 == 10)==8);
+            CHECK(solve(2*x-2 == 10)==6);
             CHECK(solve(15*x-5*x == 10)==1);
             CHECK(solve(2*x-3*x == 10)==-10);
             CHECK(solve(1000*x-2900 == 100)==3);
@@ -17,12 +17,12 @@ TEST_CASE("Test the function with RealVariable")
             CHECK(solve(9*x == 18)==2);
             CHECK(solve(7*x+11-x== 10+7)==1);
             CHECK(solve(49*x == 343)==7);
-            CHECK(solve(x-15 == 8)==-23);
-            CHECK(solve(-3*(-1*x-7)==8*x)==4.5);
-            CHECK(solve(3*x/0.5*x)==6);
-            CHECK(solve(6*x/0.5*x)==12);
-            CHECK(solve(8*x/2*x)==4);
-            CHECK(solve(27*x/3*x)==9);
+            CHECK(solve(x-15 == 8)==23);
+            CHECK(solve(-3*(-1*x-7)==8*x)==4.2);
+            CHECK(solve((3*x)/(0.5*x)==6)==0);
+            CHECK(solve((6*x)/(0.5*x)==12)==0);
+            CHECK(solve((8*x)/(2*x)==4)==0);
+            CHECK(solve((27*x)/(3*x)==9)==0);
             CHECK(solve( (7*x^2)  == 7)==1 );
             CHECK(solve( (11*x^2)+121 == 121)==0);
             CHECK(solve( (20*x^2)+100 ==420)==4);
