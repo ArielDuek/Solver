@@ -3,6 +3,7 @@
 using solver::RealVariable, solver::ComplexVariable;
 
 solver::RealVariable::RealPolinom solver::operator ^ (solver::RealVariable::RealPolinom A, int e){
+    if (e !=2 ) throw runtime_error("can not pow by number thet different from 2");
     solver::RealVariable::RealPolinom R( A.getB(),0, A.getC());
     R.setX(A.getX());
     return R;
@@ -63,6 +64,7 @@ solver::RealVariable::RealPolinom solver::operator == (solver::RealVariable::Rea
 //===========================================================================================================================
 
 solver::ComplexVariable::ComplexPolinom solver::operator ^ (solver::ComplexVariable::ComplexPolinom A, int e){
+    if (e !=2 ) throw runtime_error("can not pow by number thet different from 2");
     solver::ComplexVariable::ComplexPolinom R(A.getB(), 0, A.getC());
     R.setX(A.getX());
     return R;
