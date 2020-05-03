@@ -24,7 +24,7 @@ solver::RealVariable::RealPolinom solver::operator - (solver::RealVariable::Real
 }
 
 solver::RealVariable::RealPolinom solver::operator * (solver::RealVariable::RealPolinom A, solver::RealVariable::RealPolinom B){  // b1r+c1 * b2r+c2
-    solver::RealVariable::RealPolinom R(0, (A.getC() * B.getB()) + (B.getC() * A.getB()), A.getC() * B.getC());
+    solver::RealVariable::RealPolinom R((A.getC() * B.getA()) + (B.getC() * A.getA()), (A.getC() * B.getB()) + (B.getC() * A.getB()), A.getC() * B.getC());
     if (A.haveVar()) R.setX(A.getX());
     else R.setX(B.getX());
     return R;
@@ -85,7 +85,7 @@ solver::ComplexVariable::ComplexPolinom solver::operator - (solver::ComplexVaria
 }
 
 solver::ComplexVariable::ComplexPolinom solver::operator * (solver::ComplexVariable::ComplexPolinom A, solver::ComplexVariable::ComplexPolinom B){
-    solver::ComplexVariable::ComplexPolinom R(0, (A.getC() * B.getB()) + (B.getC() * A.getB()), A.getC() * B.getC());
+    solver::ComplexVariable::ComplexPolinom R((A.getC() * B.getA()) + (B.getC() * A.getA()), (A.getC() * B.getB()) + (B.getC() * A.getB()), A.getC() * B.getC());
     if (A.haveVar()) R.setX(A.getX());
     else R.setX(B.getX());
     return R;
